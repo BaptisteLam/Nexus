@@ -7,7 +7,8 @@ import {
   Maximize2,
   Wifi,
   WifiOff,
-  MousePointer2
+  MousePointer2,
+  Globe
 } from 'lucide-react'
 
 export default function ScreenPreview({ currentHighlight, screenshot }) {
@@ -213,6 +214,3 @@ export default function ScreenPreview({ currentHighlight, screenshot }) {
     </div>
   )
 }
-
-// Import Globe and other icons
-import { Globe } from 'lucide-react'
