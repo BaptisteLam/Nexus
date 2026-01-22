@@ -213,15 +213,16 @@ export default function Dashboard() {
   const handleClearSession = () => {
     setMessages([
       {
-        id: '1',
+        id: Date.now().toString(),
         type: 'ai',
-        content: 'Session réinitialisée. Comment puis-je vous aider ?',
+        content: "Bonjour ! Je suis Nexus, votre assistant d'automatisation desktop basé sur Claude AI. Décrivez-moi ce que vous souhaitez automatiser.",
         timestamp: new Date(),
       },
     ])
     setActions([])
     setCurrentHighlight(null)
     setScreenshot(null)
+    setIsAgentRunning(false)
   }
 
   // Clear actions
