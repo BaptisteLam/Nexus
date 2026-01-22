@@ -1,0 +1,21 @@
+# Cloudflare Pages configuration
+name = "nexus-ai-automation"
+compatibility_date = "2024-01-01"
+
+[build]
+command = "npm run build"
+
+[build.upload]
+format = "service-worker"
+
+# Pages configuration
+pages_build_output_dir = ".next"
+
+# Environment variables (configure in Cloudflare dashboard)
+[vars]
+NEXT_PUBLIC_APP_NAME = "Nexus"
+NEXT_PUBLIC_APP_VERSION = "0.2.0"
+
+# For production, set these in Cloudflare Pages dashboard:
+# ANTHROPIC_API_KEY = "your_key_here"
+# NEXT_PUBLIC_WS_URL = "wss://your-ws-server.com"
