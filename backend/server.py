@@ -226,6 +226,7 @@ async def root():
     return {
         "name": "Nexus API",
         "version": "1.0.0",
+        "status": "running",
         "description": "AI Desktop Automation Backend",
         "endpoints": [
             "/api/health",
