@@ -1,0 +1,151 @@
+{
+  "timestamp": "2026-01-22T18:09:36.452082",
+  "summary": {
+    "tests_run": 8,
+    "tests_passed": 8,
+    "success_rate": 100.0,
+    "failed_categories": [
+      "Root Endpoint"
+    ]
+  },
+  "detailed_results": [
+    {
+      "test_name": "Root Endpoint",
+      "endpoint": "",
+      "method": "GET",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": "<!DOCTYPE html>\n<html lang=\"fr\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <link rel=\"icon\" href=\"/favicon.ico\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <meta ",
+      "error": null
+    },
+    {
+      "test_name": "Health Check",
+      "endpoint": "api/health",
+      "method": "GET",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "status": "healthy",
+        "timestamp": "2026-01-22T18:09:25.690157+00:00",
+        "llm_available": true,
+        "llm_key_configured": true
+      },
+      "error": null
+    },
+    {
+      "test_name": "Screenshot Capture",
+      "endpoint": "api/desktop/screenshot",
+      "method": "POST",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "success": true,
+        "screenshot": null,
+        "timestamp": "2026-01-22T18:09:25.733466+00:00",
+        "resolution": {
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      "error": null
+    },
+    {
+      "test_name": "Move Action",
+      "endpoint": "api/desktop/action",
+      "method": "POST",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "success": true,
+        "action": "move",
+        "payload": {
+          "x": 100,
+          "y": 200
+        },
+        "timestamp": "2026-01-22T18:09:25.784487+00:00",
+        "message": "Curseur d\u00e9plac\u00e9 vers (100, 200)"
+      },
+      "error": null
+    },
+    {
+      "test_name": "Click Action",
+      "endpoint": "api/desktop/action",
+      "method": "POST",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "success": true,
+        "action": "click",
+        "payload": {
+          "x": 150,
+          "y": 250,
+          "button": "left"
+        },
+        "timestamp": "2026-01-22T18:09:25.826515+00:00",
+        "message": "Clic left \u00e0 (150, 250)"
+      },
+      "error": null
+    },
+    {
+      "test_name": "Type Action",
+      "endpoint": "api/desktop/action",
+      "method": "POST",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "success": true,
+        "action": "type",
+        "payload": {
+          "text": "Hello World"
+        },
+        "timestamp": "2026-01-22T18:09:25.861677+00:00",
+        "message": "Texte saisi: Hello World..."
+      },
+      "error": null
+    },
+    {
+      "test_name": "Simple Analysis",
+      "endpoint": "api/ai/analyze",
+      "method": "POST",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "success": true,
+        "response": "Je vais ouvrir Chrome et naviguer directement vers Google.com en utilisant une commande syst\u00e8me. Cette approche est plus efficace que de chercher l'ic\u00f4ne Chrome sur le bureau.",
+        "analysis": {
+          "coordinates": null,
+          "command": "start chrome https://google.com",
+          "explanation": "Je vais ouvrir Chrome et naviguer directement vers Google.com en utilisant une commande syst\u00e8me. Cette approche est plus efficace que de chercher l'ic\u00f4ne Chrome sur le bureau.",
+          "confidence": 95
+        }
+      },
+      "error": null
+    },
+    {
+      "test_name": "File Management Analysis",
+      "endpoint": "api/ai/analyze",
+      "method": "POST",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "success": true,
+        "response": "Je vais organiser automatiquement tous les fichiers de votre bureau en les triant par type d'extension dans des dossiers s\u00e9par\u00e9s. Par exemple, tous les fichiers .pdf iront dans un dossier 'pdf', les .jpg dans un dossier 'jpg', etc. Les fichiers sans extension seront plac\u00e9s dans un dossier 'Sans_extension'.",
+        "analysis": {
+          "coordinates": null,
+          "command": "powershell -Command \"Get-ChildItem -Path ([Environment]::GetFolderPath('Desktop')) | Group-Object Extension | ForEach-Object { $folderName = if($_.Name) { $_.Name.TrimStart('.') } else { 'Sans_extension' }; $folderPath = Join-Path ([Environment]::GetFolderPath('Desktop')) $folderName; if(!(Test-Path $folderPath)) { New-Item -ItemType Directory -Path $folderPath -Force }; $_.Group | Move-Item -Destination $folderPath -Force }\"",
+          "explanation": "Je vais organiser automatiquement tous les fichiers de votre bureau en les triant par type d'extension dans des dossiers s\u00e9par\u00e9s. Par exemple, tous les fichiers .pdf iront dans un dossier 'pdf', les .jpg dans un dossier 'jpg', etc. Les fichiers sans extension seront plac\u00e9s dans un dossier 'Sans_extension'.",
+          "confidence": 95
+        }
+      },
+      "error": null
+    }
+  ]
+}
