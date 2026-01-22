@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-22T18:09:36.452082",
+  "timestamp": "2026-01-22T18:29:42.308392",
   "summary": {
     "tests_run": 8,
     "tests_passed": 8,
@@ -28,7 +28,7 @@
       "success": true,
       "response_data": {
         "status": "healthy",
-        "timestamp": "2026-01-22T18:09:25.690157+00:00",
+        "timestamp": "2026-01-22T18:29:30.377671+00:00",
         "llm_available": true,
         "llm_key_configured": true
       },
@@ -43,12 +43,8 @@
       "success": true,
       "response_data": {
         "success": true,
-        "screenshot": null,
-        "timestamp": "2026-01-22T18:09:25.733466+00:00",
-        "resolution": {
-          "width": 1920,
-          "height": 1080
-        }
+        "message": "Use browser Screen Capture API for real screenshots",
+        "timestamp": "2026-01-22T18:29:30.417321+00:00"
       },
       "error": null
     },
@@ -66,8 +62,8 @@
           "x": 100,
           "y": 200
         },
-        "timestamp": "2026-01-22T18:09:25.784487+00:00",
-        "message": "Curseur d\u00e9plac\u00e9 vers (100, 200)"
+        "message": "Action logged. Note: Browser cannot control desktop directly.",
+        "timestamp": "2026-01-22T18:29:30.458975+00:00"
       },
       "error": null
     },
@@ -86,8 +82,8 @@
           "y": 250,
           "button": "left"
         },
-        "timestamp": "2026-01-22T18:09:25.826515+00:00",
-        "message": "Clic left \u00e0 (150, 250)"
+        "message": "Action logged. Note: Browser cannot control desktop directly.",
+        "timestamp": "2026-01-22T18:29:30.493926+00:00"
       },
       "error": null
     },
@@ -104,8 +100,8 @@
         "payload": {
           "text": "Hello World"
         },
-        "timestamp": "2026-01-22T18:09:25.861677+00:00",
-        "message": "Texte saisi: Hello World..."
+        "message": "Action logged. Note: Browser cannot control desktop directly.",
+        "timestamp": "2026-01-22T18:29:30.532762+00:00"
       },
       "error": null
     },
@@ -118,12 +114,20 @@
       "success": true,
       "response_data": {
         "success": true,
-        "response": "Je vais ouvrir Chrome et naviguer directement vers Google.com en utilisant une commande syst\u00e8me. Cette approche est plus efficace que de chercher l'ic\u00f4ne Chrome sur le bureau.",
+        "response": "Aucune capture d'\u00e9cran n'a \u00e9t\u00e9 fournie. Je ne peux pas analyser l'interface actuelle pour donner des coordonn\u00e9es pr\u00e9cises. Cependant, je peux vous donner les \u00e9tapes g\u00e9n\u00e9rales pour ouvrir Chrome et aller sur Google.\n\n**\u00c9tapes \u00e0 suivre:**\n1. Appuyez sur la touche Windows ou cliquez sur le menu D\u00e9marrer\n2. Tapez 'Chrome' dans la barre de recherche\n3. Cliquez sur Google Chrome dans les r\u00e9sultats ou appuyez sur Entr\u00e9e\n4. Une fois Chrome ouvert, cliquez dans la barre d'adresse en haut\n5. Tapez 'google.com' et appuyez sur Entr\u00e9e\n6. Alternativement, vous pouvez utiliser le raccourci Ctrl+L pour aller directement dans la barre d'adresse\n",
         "analysis": {
           "coordinates": null,
-          "command": "start chrome https://google.com",
-          "explanation": "Je vais ouvrir Chrome et naviguer directement vers Google.com en utilisant une commande syst\u00e8me. Cette approche est plus efficace que de chercher l'ic\u00f4ne Chrome sur le bureau.",
-          "confidence": 95
+          "command": null,
+          "explanation": "Aucune capture d'\u00e9cran n'a \u00e9t\u00e9 fournie. Je ne peux pas analyser l'interface actuelle pour donner des coordonn\u00e9es pr\u00e9cises. Cependant, je peux vous donner les \u00e9tapes g\u00e9n\u00e9rales pour ouvrir Chrome et aller sur Google.",
+          "steps": [
+            "Appuyez sur la touche Windows ou cliquez sur le menu D\u00e9marrer",
+            "Tapez 'Chrome' dans la barre de recherche",
+            "Cliquez sur Google Chrome dans les r\u00e9sultats ou appuyez sur Entr\u00e9e",
+            "Une fois Chrome ouvert, cliquez dans la barre d'adresse en haut",
+            "Tapez 'google.com' et appuyez sur Entr\u00e9e",
+            "Alternativement, vous pouvez utiliser le raccourci Ctrl+L pour aller directement dans la barre d'adresse"
+          ],
+          "confidence": 85
         }
       },
       "error": null
@@ -137,12 +141,19 @@
       "success": true,
       "response_data": {
         "success": true,
-        "response": "Je vais organiser automatiquement tous les fichiers de votre bureau en les triant par type d'extension dans des dossiers s\u00e9par\u00e9s. Par exemple, tous les fichiers .pdf iront dans un dossier 'pdf', les .jpg dans un dossier 'jpg', etc. Les fichiers sans extension seront plac\u00e9s dans un dossier 'Sans_extension'.",
+        "response": "Je ne peux pas voir votre bureau actuel car aucune capture d'\u00e9cran n'a \u00e9t\u00e9 fournie. Pour ranger vos fichiers du bureau par type, voici les \u00e9tapes g\u00e9n\u00e9rales selon votre syst\u00e8me d'exploitation.\n\n**\u00c9tapes \u00e0 suivre:**\n1. Windows: Clic droit sur le bureau \u2192 'Trier par' \u2192 'Type'\n2. Ou Windows: Clic droit sur le bureau \u2192 'Affichage' \u2192 'Trier par' \u2192 'Type'\n3. macOS: Sur le bureau, menu 'Affichage' \u2192 'Ranger par' \u2192 'Type'\n4. Alternative: Cr\u00e9er des dossiers manuellement (Documents, Images, Vid\u00e9os, etc.) et d\u00e9placer les fichiers dedans\n5. Pour une organisation permanente: utiliser les dossiers syst\u00e8me (Bureau \u2192 cr\u00e9er des sous-dossiers th\u00e9matiques)\n",
         "analysis": {
           "coordinates": null,
-          "command": "powershell -Command \"Get-ChildItem -Path ([Environment]::GetFolderPath('Desktop')) | Group-Object Extension | ForEach-Object { $folderName = if($_.Name) { $_.Name.TrimStart('.') } else { 'Sans_extension' }; $folderPath = Join-Path ([Environment]::GetFolderPath('Desktop')) $folderName; if(!(Test-Path $folderPath)) { New-Item -ItemType Directory -Path $folderPath -Force }; $_.Group | Move-Item -Destination $folderPath -Force }\"",
-          "explanation": "Je vais organiser automatiquement tous les fichiers de votre bureau en les triant par type d'extension dans des dossiers s\u00e9par\u00e9s. Par exemple, tous les fichiers .pdf iront dans un dossier 'pdf', les .jpg dans un dossier 'jpg', etc. Les fichiers sans extension seront plac\u00e9s dans un dossier 'Sans_extension'.",
-          "confidence": 95
+          "command": null,
+          "explanation": "Je ne peux pas voir votre bureau actuel car aucune capture d'\u00e9cran n'a \u00e9t\u00e9 fournie. Pour ranger vos fichiers du bureau par type, voici les \u00e9tapes g\u00e9n\u00e9rales selon votre syst\u00e8me d'exploitation.",
+          "steps": [
+            "Windows: Clic droit sur le bureau \u2192 'Trier par' \u2192 'Type'",
+            "Ou Windows: Clic droit sur le bureau \u2192 'Affichage' \u2192 'Trier par' \u2192 'Type'",
+            "macOS: Sur le bureau, menu 'Affichage' \u2192 'Ranger par' \u2192 'Type'",
+            "Alternative: Cr\u00e9er des dossiers manuellement (Documents, Images, Vid\u00e9os, etc.) et d\u00e9placer les fichiers dedans",
+            "Pour une organisation permanente: utiliser les dossiers syst\u00e8me (Bureau \u2192 cr\u00e9er des sous-dossiers th\u00e9matiques)"
+          ],
+          "confidence": 85
         }
       },
       "error": null
