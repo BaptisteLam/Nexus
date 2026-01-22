@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./Header";
 import ChatPanel from "./ChatPanel";
 import ScreenPreview from "./ScreenPreview";
 import ActionLogs from "./ActionLogs";
+import { useDesktopAutomation } from "@/hooks/useDesktopAutomation";
 
 export interface Message {
   id: string;
@@ -27,14 +28,23 @@ export default function Dashboard() {
     {
       id: "1",
       type: "ai",
-      content: "Bonjour ! Je suis Nexus, votre assistant d'automatisation desktop. Décrivez-moi ce que vous souhaitez automatiser.",
+      content: "Bonjour ! Je suis Nexus, votre assistant d'automatisation desktop basée sur l'API Claude. Décrivez-moi ce que vous souhaitez automatiser.",
       timestamp: new Date(Date.now() - 60000),
     },
   ]);
-  const [actions, setActions] = useState<Action[]>([]);
   const [currentHighlight, setCurrentHighlight] = useState<{ x: number; y: number } | null>(null);
+  const { actions, isProcessing, executeAutomation, clearActions } = useDesktopAutomation();
 
-  const handleSendMessage = (content: string) => {
+  // Update highlights when actions change
+  useEffect(() => {
+    const lastAction = actions[actions.length - 1];
+    if (lastAction?.coordinates && lastAction.status === "in-progress") {
+      setCurrentHighlight(lastAction.coordinates);
+      setTimeout(() => setCurrentHighlight(null), 1500);
+    }
+  }, [actions]);
+
+  const handleSendMessage = async (content: string) => {
     const userMessage: Message = {
       id: Date.now().toString(),
       type: "user",
@@ -43,64 +53,23 @@ export default function Dashboard() {
     };
     setMessages((prev) => [...prev, userMessage]);
 
-    // Simulate AI response
+    // AI response
     setTimeout(() => {
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: "ai",
-        content: simulateAIResponse(content),
+        content: isAgentRunning
+          ? "J'ai compris. Je vais analyser votre écran et exécuter cette tâche via l'API backend."
+          : "Agent inactif. Démarrez l'agent pour exécuter des automatisations.",
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, aiMessage]);
 
-      // Simulate actions
+      // Execute automation via backend API
       if (isAgentRunning) {
-        simulateActions(content);
+        executeAutomation(content);
       }
-    }, 1000);
-  };
-
-  const simulateAIResponse = (userInput: string): string => {
-    const responses = [
-      "J'ai compris. Je vais analyser votre écran et exécuter cette tâche.",
-      "Parfait. Je commence l'automatisation de cette action.",
-      "Je vais procéder à cette opération. Veuillez patienter.",
-      "Analyse de l'écran en cours. Je vais exécuter les actions nécessaires.",
-    ];
-    return responses[Math.floor(Math.random() * responses.length)];
-  };
-
-  const simulateActions = (userInput: string) => {
-    const actionTemplates = [
-      "Capture d'écran effectuée",
-      "Analyse visuelle de l'interface",
-      "Détection de l'élément cible",
-      "Déplacement du curseur vers ({x}, {y})",
-      "Clic gauche exécuté",
-      "Saisie de texte",
-      "Ouverture de l'application",
-      "Organisation des fichiers",
-      "Action complétée avec succès",
-    ];
-
-    actionTemplates.forEach((template, index) => {
-      setTimeout(() => {
-        const coords = { x: Math.floor(Math.random() * 800) + 100, y: Math.floor(Math.random() * 600) + 100 };
-        const action: Action = {
-          id: `${Date.now()}-${index}`,
-          description: template.replace("{x}", coords.x.toString()).replace("{y}", coords.y.toString()),
-          coordinates: template.includes("{x}") ? coords : undefined,
-          timestamp: new Date(),
-          status: index === actionTemplates.length - 1 ? "completed" : "in-progress",
-        };
-        setActions((prev) => [...prev, action]);
-
-        if (action.coordinates) {
-          setCurrentHighlight(action.coordinates);
-          setTimeout(() => setCurrentHighlight(null), 1500);
-        }
-      }, index * 800);
-    });
+    }, 500);
   };
 
   const handleToggleAgent = () => {
@@ -133,7 +102,7 @@ export default function Dashboard() {
         timestamp: new Date(),
       },
     ]);
-    setActions([]);
+    clearActions();
     setCurrentHighlight(null);
   };
 

@@ -1,6 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import type { Action } from "./Dashboard";
 
 interface ActionLogsProps {
@@ -34,7 +37,7 @@ export default function ActionLogs({ actions }: ActionLogsProps) {
       case "in-progress":
         return "text-blue-600";
       case "pending":
-        return "text-gray-500";
+        return "text-muted-foreground";
     }
   };
 
@@ -52,59 +55,65 @@ export default function ActionLogs({ actions }: ActionLogsProps) {
   return (
     <div className="h-full flex flex-col bg-white">
       {/* Logs Header */}
-      <div className="px-6 py-2 border-b border-gray-300 flex items-center justify-between">
+      <div className="px-6 py-2 border-b flex items-center justify-between">
         <div>
-          <h3 className="text-base font-bold font-times">Journal d'actions</h3>
-          <p className="text-xs text-gray-600 mt-0.5">
+          <h3 className="text-base font-bold">Journal d'actions</h3>
+          <p className="text-xs text-muted-foreground mt-0.5">
             {actions.length} action{actions.length !== 1 ? "s" : ""} enregistrée{actions.length !== 1 ? "s" : ""}
           </p>
         </div>
-        <button
+        <Button
+          variant="outline"
+          size="sm"
           onClick={() => window.location.reload()}
-          className="px-3 py-1 text-xs border border-gray-400 hover:bg-gray-100 transition-colors"
+          className="text-xs"
         >
           Effacer
-        </button>
+        </Button>
       </div>
 
       {/* Logs Content */}
-      <div className="flex-1 overflow-y-auto px-6 py-3 font-mono text-xs">
-        {actions.length === 0 ? (
-          <div className="h-full flex items-center justify-center text-gray-400">
-            <p>Aucune action exécutée. Démarrez l'agent pour commencer.</p>
-          </div>
-        ) : (
-          <div className="space-y-1">
-            {actions.map((action) => (
-              <div
-                key={action.id}
-                className={`flex items-start gap-3 py-1 px-2 hover:bg-gray-50 rounded transition-colors ${
-                  action.status === "in-progress" ? "bg-blue-50" : ""
-                }`}
-              >
-                <span className="text-gray-400 select-none w-24 flex-shrink-0">
-                  {formatTime(action.timestamp)}
-                </span>
-                <span className={`font-bold w-4 flex-shrink-0 ${getStatusColor(action.status)}`}>
-                  {getStatusIcon(action.status)}
-                </span>
-                <span className="flex-1">
-                  {action.description}
-                  {action.coordinates && (
-                    <span className="text-gray-500 ml-2">
-                      @ ({action.coordinates.x}, {action.coordinates.y})
-                    </span>
-                  )}
-                </span>
-              </div>
-            ))}
-            <div ref={logsEndRef} />
-          </div>
-        )}
-      </div>
+      <ScrollArea className="flex-1">
+        <div className="px-6 py-3 font-mono text-xs">
+          {actions.length === 0 ? (
+            <div className="h-32 flex items-center justify-center text-muted-foreground">
+              <p>Aucune action exécutée. Démarrez l'agent pour commencer.</p>
+            </div>
+          ) : (
+            <div className="space-y-1">
+              {actions.map((action) => (
+                <div
+                  key={action.id}
+                  className={`flex items-start gap-3 py-1 px-2 hover:bg-muted/50 transition-colors ${
+                    action.status === "in-progress" ? "bg-blue-50" : ""
+                  }`}
+                >
+                  <span className="text-muted-foreground select-none w-24 flex-shrink-0">
+                    {formatTime(action.timestamp)}
+                  </span>
+                  <span className={`font-bold w-4 flex-shrink-0 ${getStatusColor(action.status)}`}>
+                    {getStatusIcon(action.status)}
+                  </span>
+                  <span className="flex-1">
+                    {action.description}
+                    {action.coordinates && (
+                      <span className="text-muted-foreground ml-2">
+                        @ ({action.coordinates.x}, {action.coordinates.y})
+                      </span>
+                    )}
+                  </span>
+                </div>
+              ))}
+              <div ref={logsEndRef} />
+            </div>
+          )}
+        </div>
+      </ScrollArea>
+
+      <Separator />
 
       {/* Logs Footer */}
-      <div className="px-6 py-2 border-t border-gray-300 text-xs text-gray-600">
+      <div className="px-6 py-2 text-xs text-muted-foreground">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1">
             <span className="text-green-600 font-bold">✓</span>
@@ -115,7 +124,7 @@ export default function ActionLogs({ actions }: ActionLogsProps) {
             <span>En cours</span>
           </div>
           <div className="flex items-center gap-1">
-            <span className="text-gray-500 font-bold">○</span>
+            <span className="text-muted-foreground font-bold">○</span>
             <span>En attente</span>
           </div>
         </div>

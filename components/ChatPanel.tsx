@@ -1,6 +1,10 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 import type { Message } from "./Dashboard";
 
 interface ChatPanelProps {
@@ -36,80 +40,89 @@ export default function ChatPanel({ messages, onSendMessage }: ChatPanelProps) {
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-white">
       {/* Chat Header */}
-      <div className="px-6 py-4 border-b border-gray-300">
-        <h2 className="text-xl font-bold font-times">Interface de commande</h2>
-        <p className="text-sm text-gray-600 mt-1">
+      <div className="px-6 py-4 border-b">
+        <h2 className="text-xl font-bold">Interface de commande</h2>
+        <p className="text-sm text-muted-foreground mt-1">
           Décrivez votre tâche en langage naturel
         </p>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
-        {messages.map((message) => (
-          <div
-            key={message.id}
-            className={`flex flex-col ${
-              message.type === "user" ? "items-end" : "items-start"
-            }`}
-          >
+      <ScrollArea className="flex-1 px-6 py-4">
+        <div className="space-y-4">
+          {messages.map((message) => (
             <div
-              className={`max-w-[85%] px-4 py-3 rounded-lg ${
-                message.type === "user"
-                  ? "bg-black text-white"
-                  : "bg-gray-100 text-black border border-gray-300"
+              key={message.id}
+              className={`flex flex-col ${
+                message.type === "user" ? "items-end" : "items-start"
               }`}
             >
-              <p className="text-sm leading-relaxed whitespace-pre-wrap">
-                {message.content}
-              </p>
+              <div
+                className={`max-w-[85%] px-4 py-3 ${
+                  message.type === "user"
+                    ? "bg-black text-white"
+                    : "bg-muted text-foreground border"
+                }`}
+              >
+                <p className="text-sm leading-relaxed whitespace-pre-wrap">
+                  {message.content}
+                </p>
+              </div>
+              <span className="text-xs text-muted-foreground mt-1 px-1">
+                {formatTime(message.timestamp)}
+              </span>
             </div>
-            <span className="text-xs text-gray-500 mt-1 px-1">
-              {formatTime(message.timestamp)}
-            </span>
-          </div>
-        ))}
-        <div ref={messagesEndRef} />
-      </div>
+          ))}
+          <div ref={messagesEndRef} />
+        </div>
+      </ScrollArea>
+
+      <Separator />
 
       {/* Input Form */}
-      <div className="px-6 py-4 border-t border-gray-300">
+      <div className="px-6 py-4">
         <form onSubmit={handleSubmit} className="flex gap-2">
-          <input
+          <Input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ex: Range mes fichiers par type dans le dossier Downloads"
-            className="flex-1 px-4 py-3 border-2 border-black focus:outline-none focus:ring-2 focus:ring-gray-400 text-sm"
+            className="flex-1"
           />
-          <button
+          <Button
             type="submit"
             disabled={!input.trim()}
-            className="px-6 py-3 bg-black text-white font-bold font-times text-sm hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
           >
             ENVOYER
-          </button>
+          </Button>
         </form>
         <div className="mt-3 flex gap-2 flex-wrap">
-          <button
+          <Button
+            variant="outline"
+            size="sm"
             onClick={() => onSendMessage("Range mes fichiers du bureau par type")}
-            className="px-3 py-1 text-xs border border-gray-400 hover:bg-gray-100 transition-colors"
+            className="text-xs"
           >
             Ranger fichiers
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
             onClick={() => onSendMessage("Ouvre Chrome et va sur gmail.com")}
-            className="px-3 py-1 text-xs border border-gray-400 hover:bg-gray-100 transition-colors"
+            className="text-xs"
           >
             Ouvrir application
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
             onClick={() => onSendMessage("Crée un dossier 'Projets 2026' sur le bureau")}
-            className="px-3 py-1 text-xs border border-gray-400 hover:bg-gray-100 transition-colors"
+            className="text-xs"
           >
             Créer dossier
-          </button>
+          </Button>
         </div>
       </div>
     </div>
